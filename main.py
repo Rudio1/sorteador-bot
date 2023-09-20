@@ -35,6 +35,8 @@ async def on_ready():
 
 @client.command(name="nick") 
 async def sortearnick(ctx):
+    global total_participants
+    global sorteio
     if ctx.channel.id == 1154178318757797888:
         guild = client.get_guild(1151924494789779596)
         rolemod = discord.utils.get(guild.roles, id=1151925408925753394)
@@ -57,16 +59,21 @@ async def sortearnick(ctx):
             sorteado = client.get_user((sorteadoid := random.choice(sorteio)))
             await ctx.send(embed=(embed := discord.Embed(title=f"Parabéns!", description=f"{sorteado.mention} venceu o sorteio e faturou o nick {nick}!")))
             await message.delete()
-
+            total_participants = 0
+            sorteio = []
             try:
                 await sorteado.send(embed=(embed := discord.Embed(title=f"Ganhou!",description=f"Você se inscreveu e ganhou o sorteio do nick {nick} no servidor da NinjaCorps.\nResgate com:```@rudio1\n@brenoprates\n@gopzera\n@gentlemantrollface```")))
             except:
                 pass
         else:
             await ctx.send(embed=(embed := discord.Embed(title=f'Ops...', description=f'Você não tem autorização para isso.\nPeça para um dos {(roledonos := discord.utils.get(guild.roles, id=1151925408925753394)).mention} para iniciar um sorteio.')), view=(view := Menu()))
+    
+
 
 @client.command(name="conta") 
 async def sortearconta(ctx):
+    global total_participants
+    global sorteio
     if ctx.channel.id == 1154178318757797888:
         guild = client.get_guild(1151924494789779596)
         rolemod = discord.utils.get(guild.roles, id=1151925408925753394)
@@ -85,15 +92,18 @@ async def sortearconta(ctx):
                 await message.edit(embed=discord.Embed(title=f'Sorteio de contas', description=f'Clique no botão para se registrar no sorteio!\nTotal de Participantes: {total_participants}\nO sorteio será realizado em {n} segundos.'))
                 await asyncio.sleep(1) 
                 n = str(int(n) - 1)
-
+            
+            global sorteio
             sorteado = client.get_user((sorteadoid := random.choice(sorteio)))
             await ctx.send(embed=(embed := discord.Embed(title=f"Parabéns!", description=f"{sorteado.mention} venceu o sorteio e ganhou a conta!")))
             await message.delete()
-
+            total_participants = 0
+            sorteio = []
             try:
                 await sorteado.send(embed=(embed := discord.Embed(title=f"Ganhou!",description=f"Você se inscreveu e ganhou o Sorteio de contas no servidor da NinjaCorps.\nResgate com:```@rudio1\n@brenoprates\n@gopzera\n@gentlemantrollface```")))
             except:
                 pass
         else:
             await ctx.send(embed=(embed := discord.Embed(title=f'Ops...', description=f'Você não tem autorização para isso.\nPeça para um dos {(roledonos := discord.utils.get(guild.roles, id=1151925408925753394)).mention} para iniciar um sorteio.')), view=(view := Menu()))
+          
 client.run('MTE1MzQ5NjQzMzU5MzQyMTg2Nw.G9_Ky4.bDBieUtiu6HfUaDjOQ0bZwfOdt7A-hTbVzo1QA')
