@@ -143,4 +143,4 @@ async def sortearnick(ctx):
         else:
             await ctx.send(embed=(embed := discord.Embed(title=f'Ops...', description=f'Você não tem autorização para isso.\nPeça para um dos {(roledonos := discord.utils.get(guild.roles, id=1151925408925753394)).mention} para iniciar um sorteio.')), view=(view := Menu()))
           
-client.run('MTE1MzQ5NjQzMzU5MzQyMTg2Nw.G9_Ky4.bDBieUtiu6HfUaDjOQ0bZwfOdt7A-hTbVzo1QA')
+client.run('')
